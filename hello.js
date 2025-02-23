@@ -21,8 +21,44 @@ function increase_points() {
 
     // You have to update the new value of the variable manually
     document.getElementById("influence_points_display").innerHTML = influence_points
+    // Emoji effects after player clicks button
+    prayer_effects()
 }
 
+// Function to create a prayer emoji effect after pressing prayer button
+
+function prayer_effects() {
+    // Creates a span element for the emoji
+    let emoji = document.createElement("span")
+    emoji.textContent = "🙏"; 
+    emoji.style.position = "absolute";
+    emoji.style.fontSize = "24px";
+    emoji.style.opacity = "1";
+    emoji.style.transition = "transform 1s ease-out, opacity 1s ease-out";
+
+   // Hardcoded position for where the prayer button currently is
+    let x = 8; // Exact X position of prayer button
+    let y = 270; // Slighly above the prayer button
+
+    // Sets the position of the emoji
+    emoji.style.left = `${x}px`;
+    emoji.style.top = `${y}px`;
+
+    // Adds the emoji to the body
+    document.body.appendChild(emoji);
+
+    // Animate emoji upwards
+    setTimeout(() => {
+        emoji.style.transform = "translateY(-50px)";
+        emoji.style.opacity = "0";
+    }, 10);
+
+    // Remove emoji after animation
+    setTimeout(() => {
+        emoji.remove();
+    }, 1000);
+
+}
 
 // Experimenting with classes in JS
 class Team {

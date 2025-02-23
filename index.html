@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Idol Game Testing</title>
         <script type="text/javascript" src="./hello.js"></script>
+        <link rel = "stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <h1>Current Religion: <span id="team_name_display"></span></h1>
@@ -17,7 +18,7 @@
 
         <h1>Button Testing</h1>
         <h2>Influence:  <span id="influence_points_display"></span></h2>
-        <button type="button" onclick="increase_points()">Pray</button>
+        <button type="button" onclick="increase_points(); prayer_effects()">Pray</button>
 
         <h2>Start a religion to add points: <span id="class_testing_display"></span></h2>
         <button type="button" onclick="Current.increase_points('class_testing_display')">Spend some time!</button>
