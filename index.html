@@ -7,6 +7,13 @@
         <link rel = "stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <div>
+            <span class="right_side">
+                <h1>Leaderboard</h1>
+                <span id="team_list"></span>
+            </span>
+        </div>
+
         <h1>Current Religion: <span id="team_name_display"></span></h1>
 
         <form action="" id="team_form">
@@ -16,11 +23,9 @@
             <button type="submit" value="Send">Create</button>
         </form>
 
-        <h1>Button Testing</h1>
-        <h2>Influence:  <span id="influence_points_display"></span></h2>
-        <button type="button" onclick="increase_points(); prayer_effects()">Pray</button>
+        <h1>Spend some time</h1>
+        <h2>Power: <span id="points_display"></span></h2>
+        <button type="button" onclick="team_list[0].increase_points('points_display')">Pray</button> <!-- Currently displays the TOP (index 0) of the team_list points -->
 
-        <h2>Start a religion to add points: <span id="class_testing_display"></span></h2>
-        <button type="button" onclick="Current.increase_points('class_testing_display')">Spend some time!</button>
     </body>
 </html>
