@@ -16,15 +16,15 @@
 
         <h1>Current Religion: <span id="team_name_display"></span></h1>
 
-        <form action="" id="team_form">
+        <form action="" id="team_form" autocomplete="off">
             <h1>Start a religion</h1>
             <label for="team_name">Name: </label>
-            <input type="text" id="team_name" name="team_name">
+            <input type="text" id="team_name" name="team_name" maxlength="20">
             <button type="submit" value="Send">Create</button>
         </form>
 
         <h1>Spend some time</h1>
-        <h2>Power: <span id="points_display"></span></h2>
+        <h2>Influence: <span id="points_display"></span></h2>
         <button type="button" onclick="team_list[0].increase_points('points_display')">Pray</button> <!-- Currently displays the TOP (index 0) of the team_list points -->
 
     </body>
