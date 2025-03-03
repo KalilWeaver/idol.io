@@ -7,6 +7,8 @@ window.onload = function() {
     document.getElementById("points_display").innerHTML = 0
     document.getElementById("team_name_display").innerHTML = "None"
     document.getElementById("team_list").innerHTML = "Empty"
+    // sets up images for each religion
+    idol_image_upload();
 }
 
 
@@ -22,7 +24,7 @@ function prayer_effects() {
 
    // Hardcoded position for where the prayer button currently is
     let x = 55; // Exact X position of prayer button
-    let y = 250; // Slighly above the prayer button
+    let y = 540; // Slighly above the prayer button
 
     // Sets the position of the emoji
     emoji.style.left = `${x}px`;
@@ -71,6 +73,16 @@ class Team {
     }
 }
 
+function idol_image_upload() {
+    let idol_potrait = document.getElementById("idol_image");
+    let input_file = document.getElementById("input-file");
+
+    input_file.onchange = function () {
+        idol_potrait.src = URL.createObjectURL(input_file.files[0]);
+        
+    };
+}
+
 
 // Handles form submission for creating a new team and updates the leaderboard
 document.addEventListener('DOMContentLoaded', init, false);
@@ -80,8 +92,16 @@ function init(){
         event.preventDefault()
         
         var team_name = document.getElementById("team_name").value
+        // for religion/idol picture
+        var idol_game_src = document.getElementById("idol_image").src
+
+        // alert created if user does not put in team name
+        if (team_name == "") {
+            alert("Please enter a name for your religion!")
+            return;
+        }
         display_team_list.push(team_name)
-        team_list.push(new Team(team_name, 0, "img.png", 1))
+        team_list.push(new Team(team_name, 0, idol_game_src, 1))
 
         team_list.forEach(function(entry) {
             document.getElementById("team_name_display").innerHTML = entry.display_name()
