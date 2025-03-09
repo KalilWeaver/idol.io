@@ -23,8 +23,8 @@ function prayer_effects() {
     emoji.style.transition = "transform 1s ease-out, opacity 1s ease-out";
 
    // Hardcoded position for where the prayer button currently is
-    let x = 55; // Exact X position of prayer button
-    let y = 540; // Slighly above the prayer button
+    let x = 945; // Exact X position of prayer button
+    let y = 700; // Slighly above the prayer button
 
     // Sets the position of the emoji
     emoji.style.left = `${x}px`;
@@ -107,6 +107,11 @@ function init(){
             document.getElementById("team_name_display").innerHTML = entry.display_name()
         })
         document.getElementById("team_list").innerHTML = display_team_list.join("<br>")
+        document.getElementById("game").querySelector("#idol_image").src = idol_game_src;
+        // this hides the team creating screen
+        document.getElementById("start_screen").style.display = "none";
+        document.getElementById("game").style.display="block";
+        
     })
 };
 

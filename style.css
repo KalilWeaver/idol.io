@@ -12,6 +12,41 @@ body {
     margin-left: 50px;
 }
 
+/*Game*/
+#game {
+    display:none;
+    text-align: center;
+}
+
+#game img{
+    width: 500px;
+    height:500px;
+    border-radius: 10px;
+}
+
+#game button{
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #bcbfc0;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+#game button:hover {background-color: #bcbfc0}
+
+#game button:active {
+    background-color: #bcbfc0;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
 /*Leader board */
 .right_side {
     float: right;
