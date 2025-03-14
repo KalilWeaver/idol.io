@@ -48,8 +48,13 @@ body {
 }
 
 /*Leader board */
-.right_side {
+.leaderboard {
     float: right;
+}
+
+/* Create Screen */
+#start_screen {
+    float: none;
 }
 
 /* For Team image*/
@@ -58,4 +63,9 @@ body {
     height: 180px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+/* Makes emoji not clickable/highlightable */
+#emoji {
+    pointer-events: none;
 }
