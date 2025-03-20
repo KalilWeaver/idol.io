@@ -1,31 +1,97 @@
+html {
+    height: 98%;
+    overflow:auto;
+    border: 0px #202020 solid;
+}
+
 /*Page Background*/
 body {
+    min-height: 100%;
+    color:#202020;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
     background-image: url(bluesky.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
+    background-origin: border-box;
 
-    margin-top: 20px;
-    margin-bottom: 50px;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+h1 {
+    margin-top: 00px;
+    margin-bottom: 20px;
+}
+
+/*Container*/
+.container{
+    display: flex;
+    align-items:stretch;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    height:97vh;
+}
+
+.container div{
+    height: auto;
+}
+
+/*Leader board */
+.leaderboard {
+    order: 3;
+    flex: 1;
+    color:#fff;
+    background-color: #20364e;
+    border: 3px #202020 solid;
+    padding: 10px;
+}
+
+/*Religion creator */
+.creator {
+    order: 1;
+    flex: 1;
+    color:#fff;
+    background-color: #20364e;
+    border: 3px #202020 solid;
+    padding: 10px;
+    display:flex;
+    flex-direction: column;
+    align-items: baseline;
+    align-content:center;
+}
+
+/*Main button and idol display */
+.main {
+    order: 2;
+    flex: 4;
+    display:flex;
+    flex-direction: column;
+    align-self: stretch;
+    align-items:center;
+    margin-top: 5vh;
 }
 
 /*Game*/
 #game {
-    display:none;
-    text-align: center;
+    visibility: hidden;
+    /* text-align: center; */
 }
 
 #game img{
     width: 500px;
-    height:500px;
+    height: 500px;
+    border: 3px #202020 solid;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 #game button{
-    display: inline-block;
+    display: block;
     padding: 15px 25px;
     font-size: 24px;
     cursor: pointer;
@@ -33,28 +99,18 @@ body {
     text-decoration: none;
     outline: none;
     color: #fff;
-    background-color: #bcbfc0;
+    background-color: #20364e;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 0 9px #121c28;
 }
 
-#game button:hover {background-color: #bcbfc0}
+/* #game button:hover {background-color: #bcbfc0} */
 
 #game button:active {
-    background-color: #bcbfc0;
-    box-shadow: 0 5px #666;
+    background-color: #20364e;
+    box-shadow: 0 5px #121c28;
     transform: translateY(4px);
-}
-
-/*Leader board */
-.leaderboard {
-    float: right;
-}
-
-/* Create Screen */
-#start_screen {
-    float: none;
 }
 
 /* For Team image*/
@@ -69,3 +125,39 @@ body {
 #emoji {
     pointer-events: none;
 }
+
+/* Hide the default buttons */
+input[type="file"] {
+    display:none;
+}
+
+input[type="submit"] {
+    display:none;
+}
+
+/* File upload button styling */
+.custom-file-upload {
+    border: 2px solid #ccc;
+    display: block;
+    padding: 6px 6px 6px 6px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 15px;
+    background-color: #121c28;
+    height: 25px;
+    width: 150px;
+  }
+
+  .custom-create {
+    border: 2px solid #ccc;
+    display: block;
+    padding: 6px 6px 6px 6px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 15px;
+    background-color: #121c28;
+    height: 40px;
+    width: 200px;
+  }

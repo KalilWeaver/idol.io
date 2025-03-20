@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport"content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8">
-        <title>idol game</title>
+        <title>Idol Game</title>
         <script type="text/javascript" src="./hello.js"></script>
         <link rel = "stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div>
-            <span class="leaderboard">
+        <div class="container">
+            <div class="leaderboard">
                 <h1>Leaderboard</h1>
                 <span id="leaderboard"></span>
-            </span>
-        </div>
-
-        <h1>Current Religion: <span id="team_name_display"></span></h1>
-        <div id = "start_screen">
-            <form action="" id="team_form" autocomplete="off">
-                <h1>Start a religion</h1>
-                <label for="team_name">Name: </label>
-                <input type="text" id="team_name" name="team_name" maxlength="20">
-            <div class = "image">
-                <h2>Idol Portrait:</h2>
-                <img  src="default-image.png" id="idol_image">
-                <input type="file" accept = "image/jpeg, image/png, image/jpg" id = "input-file">
             </div>
-                <button type="submit" value="Send" onclick="setTimeout(clear_field, 1)">Create</button>
-            </form>
-        </div>
-        <div id ="game">
-            <h1> Spend Some Time🙏📖 </h1>
-            <img  src = "default-image.png" id = "current_idol_image">
-            <h2>Influence: <span id="points_display"></span></h2>
-            <button id="pray_button" type="button" onclick="current_team.increase_points()">Pray</button>
+            <div class="creator" id = "start_screen">
+                
+                <form action="" id="team_form" autocomplete="off">
+                    <h1>Start a religion</h1>
+                    <label for="team_name">Name: </label>
+                    <input type="text" id="team_name" name="team_name" maxlength="22">
+                <span class = "image">
+                    <h3>Iconography:</h3>
+                    <img src="default-image.png" id="idol_image">
+                </span>
+                    <p></p>
+                    <label for="input-file" class="custom-file-upload">
+                        Upload image
+                    </label>
+                    <input id="input-file" type="file" accept = "image/jpeg, image/png, image/jpg"/>
+                    <p></p>
+                    <label for="create_button" class="custom-create">
+                        Create
+                    </label>
+                    <input id="create_button" type="submit" value="Send" onclick="setTimeout(clear_field, 10)">
+                </form>
+            </div>
+            <div class="main" id ="game">
+                <h1>The Church of <span id="team_name_display"></span></h1>
+                <!-- <h2> Spend Some Time🙏📖 </h2> -->
+                <h2>29:59</h2>
+                <img src = "default-image.png" id = "current_idol_image">
+                <h2>Influence: <span id="points_display"></span></h2>
+                <button id="pray_button" type="button" onclick="current_team.increase_points()">Pray</button>
+            </div>
         </div>
     </body>
 </html>

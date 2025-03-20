@@ -1,14 +1,14 @@
-// team_list contains all information about a team, display_team_list is only a list of names
+// team_list contains all information about a team
 const team_list = new Map()
 const leaderboard = new Array()
 
-// Class for creating a new religion, upgrade_level can refer to which milestone the team has achieved and which buttons they have access to
+// Class for creating a new religion, tier can refer to which milestone the team has achieved and which buttons they have access to
 class Team {
-    constructor(name, point_total, image_file, upgrade_level) {
+    constructor(name, point_total, image_file, tier) {
         this.name = name;
         this.point_total = point_total;
         this.image_file = image_file;
-        this.upgrade_level = upgrade_level;
+        this.tier = tier;
     }
     display_name() {
         return this.name;
@@ -19,8 +19,8 @@ class Team {
     display_image() {
         return this.image_file;
     }
-    display_level() {
-        return this.upgrade_level;
+    display_tier() {
+        return this.tier;
     }
     increase_points() {
         this.point_total++;
@@ -36,11 +36,21 @@ var current_team = new Team("None", 0, "default-image.png", 1)
 window.onload = function() { 
     document.getElementById("points_display").innerHTML = current_team.display_points()
     document.getElementById("team_name_display").innerHTML = current_team.display_name()
-    document.getElementById("leaderboard").innerHTML = "Empty.."
+    document.getElementById("leaderboard").innerHTML = ""
     // sets up images for each religion
     idol_image_upload();
 }
 
+// Use this function to change elements whenever the window is resized
+window.onchange = function() {
+    // Update the prayer effects location (only works if there is no vertical scrollbar)
+    let button = document.getElementById("pray_button")
+    let rect = button.getBoundingClientRect()
+    let x = ((rect.left + rect.right) / 2);
+    let y = ((rect.top + rect.bottom) / 2);
+    emoji.style.left = `${x}px`;
+    emoji.style.top = `${y}px`;
+}
 
 // Function to create a prayer emoji effect after pressing prayer button
 function prayer_effects() {
@@ -58,12 +68,12 @@ function prayer_effects() {
     let rect = button.getBoundingClientRect()
 
     // Average of left right, top bottom (doesn't exactly center it)
-    let x = ((rect.left + rect.right) / 2);
-    let y = ((rect.top + rect.bottom) / 2);
+    let x = rect.left
+    let y = rect.top
 
     // Sets the position of the emoji
-    emoji.style.left = `${x}px`;
-    emoji.style.top = `${y}px`;
+    emoji.style.left = `${x+35}px`;
+    emoji.style.top = `${y-10}px`;
 
     // Adds the emoji to the body
     document.body.appendChild(emoji);
@@ -118,7 +128,7 @@ function init(){
 
         // Creates a button for the new entry in the leaderboard that allows you to switch between teams
 
-        leaderboard.push(`<button type=\"button\" onclick=\"switch_team('${input_name}')\">Join</button>` + input_name)
+        leaderboard.push(`<button type=\"button\" onclick=\"switch_team('${input_name}')\">Join</button>&nbsp;&nbsp;&nbsp;&nbsp;` + input_name)
         
         // Updates the team name and points display
         document.getElementById("team_name_display").innerHTML = created_team.display_name()
@@ -133,7 +143,7 @@ function init(){
         document.getElementById("game").querySelector("#current_idol_image").src = idol_game_src;
         // this hides the team creating screen
         // document.getElementById("start_screen").style.display = "none";
-        document.getElementById("game").style.display="block";
+        document.getElementById("game").style.visibility="visible";
     })
 };
 
