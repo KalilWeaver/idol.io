@@ -100,6 +100,19 @@ function idol_image_upload() {
     };
 }
 
+function profanity_checker(text) {
+    let banned_words = ["fuck", "shit", "ass", "bitch", "hoe", "slut", "tits", "dick", "pussy", "whores",
+         "nigga", "faggot", "bastard", "cock", "cunt", "retard", "boob", "boobs", "titties", "boobies", "hell", "shitty", "whore" ];
+    text = text.toLowerCase() // converts text to lowercase to detect profanity or slurs
+    for (let word of banned_words) {
+        if (text.includes(word)) {
+            return true
+        }
+    }
+    return false
+
+}
+
 // Gets the background music element
 let background_music = document.getElementById("background_music");
 
@@ -119,6 +132,11 @@ function init(){
         if (input_name == "") {
             alert("Please enter a name for your religion!")
             return;
+        }
+
+        if (profanity_checker(input_name)) {
+            alert("Innapropriate name! Please enter a different name.")
+            return
         }
 
         if (team_list.has(input_name)) {
