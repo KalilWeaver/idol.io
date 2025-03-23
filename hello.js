@@ -100,9 +100,13 @@ function idol_image_upload() {
     };
 }
 
+// Gets the background music element
+let background_music = document.getElementById("background_music");
+
 // Runs every time a new team is created
 document.addEventListener('DOMContentLoaded', init, false);
 function init(){
+    var background_music = document.getElementById("background_music")
     var team_form = document.getElementById("team_form")
     team_form.addEventListener("submit", function(event) {
         event.preventDefault()
@@ -144,6 +148,9 @@ function init(){
         // this hides the team creating screen
         // document.getElementById("start_screen").style.display = "none";
         document.getElementById("game").style.visibility="visible";
+
+        // Once the team is created it plays heavenly music
+        background_music.play().catch(error => console.log("Autoplay blocked, user interaction needed."));
     })
 };
 
