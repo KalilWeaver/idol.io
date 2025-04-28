@@ -1,3 +1,10 @@
+
+// Supabase client initialization
+const supabaseUrl = 'https://zbvbngqrfadqjvehdqgn.supabase.co'
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpidmJuZ3FyZmFkcWp2ZWhkcWduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUyNjYxMjgsImV4cCI6MjA2MDg0MjEyOH0.91JgaDgKRA9NVYzn15RdGUdsTvt4V7LRTTM8nHBj--E'
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+
+
 // team_list contains all information about a team
 const team_list = new Map()
 const leaderboard = new Array()
@@ -22,11 +29,41 @@ class Team {
     display_tier() {
         return this.tier;
     }
-    increase_points() {
+    async increase_points() {
         this.point_total++;
         document.getElementById("points_display").innerHTML = this.point_total
         prayer_effects()
+
+        // updates the database with the new points
+        const {data, error} = await supabase
+            .from('team')
+            .update({ point_total: this.point_total })
+            .eq('name', this.name)
+            .select()
+            .single()
+
     }
+}
+
+// function to load teams in the database
+async function load_teams() {
+    const { data, error } = await supabase.from('team').select('*');
+
+    if (error) {
+        console.error('Error loading teams:', error);
+        return;
+    }
+
+    data.forEach(team => {
+        const loaded_team = new Team(team.name, team.point_total, team.image_file, team.tier);
+        team_list.set(team.name, loaded_team);
+
+        leaderboard.push(
+            `<button type="button" onclick="switch_team('${team.name}')">Join</button>&nbsp;&nbsp;&nbsp;&nbsp;` + team.name
+        );
+    });
+
+    document.getElementById("leaderboard").innerHTML = leaderboard.join("<br>");
 }
 
 // Default Team that is selected when the page is loaded. This value will be overwritten by a team that the player chooses
@@ -169,6 +206,20 @@ function init(){
 
         // Once the team is created it plays heavenly music
         background_music.play().catch(error => console.log("Autoplay blocked, user interaction needed."));
+
+        // saves the team to the database
+        supabase
+         .from('team')
+         .insert([
+             { name: input_name, point_total: 0, image_file: idol_game_src, tier: 1 }
+         ])
+         .then(({ data, error }) => {
+             if (error) {
+                 console.error('Error inserting team:', error);
+             } else {
+                 console.log('Team inserted successfully:', data);
+             }
+         });
     })
 };
 
