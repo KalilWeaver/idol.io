@@ -39,7 +39,7 @@ class Team {
             .from('religion')
             .update({ point_total: this.point_total })
             .eq('name', this.name)
-            .select()
+            .select('*')
             .single()
 
     }
