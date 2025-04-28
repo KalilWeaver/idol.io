@@ -71,6 +71,7 @@ var current_team = new Team("None", 0, "default-image.png", 1)
 
 // Values to update when page is first loaded
 window.onload = function() { 
+    load_teams()
     document.getElementById("points_display").innerHTML = current_team.display_points()
     document.getElementById("team_name_display").innerHTML = current_team.display_name()
     document.getElementById("leaderboard").innerHTML = ""
