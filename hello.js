@@ -209,7 +209,7 @@ function init(){
 
         // saves the team to the database
         supabase
-         .from('team')
+         .from('religion')
          .insert([
              { name: input_name, point_total: 0, image_file: idol_game_src, tier: 1 }
          ])
