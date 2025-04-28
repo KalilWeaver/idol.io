@@ -36,7 +36,7 @@ class Team {
 
         // updates the database with the new points
         const {data, error} = await supabase
-            .from('team')
+            .from('religion')
             .update({ point_total: this.point_total })
             .eq('name', this.name)
             .select()
@@ -47,7 +47,7 @@ class Team {
 
 // function to load teams in the database
 async function load_teams() {
-    const { data, error } = await supabase.from('team').select('*');
+    const { data, error } = await supabase.from('religion').select('*');
 
     if (error) {
         console.error('Error loading teams:', error);
