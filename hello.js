@@ -129,14 +129,45 @@ function prayer_effects() {
 
 }
 
-function idol_image_upload() {
-    let idol_portrait = document.getElementById("idol_image");
-    let input_file = document.getElementById("input-file");
+let uploadedImageUrl = "default-image.png"; // Global
 
-    input_file.onchange = function () {
-        idol_portrait.src = URL.createObjectURL(input_file.files[0]);
+function idol_image_upload() {
+    const idolPortrait = document.getElementById("idol_image");
+    const inputFile = document.getElementById("input-file");
+
+    inputFile.onchange = async function () {
+        const file = inputFile.files[0];
+        if (!file) return;
+
+        const fileName = `${Date.now()}_${file.name}`;
+
+        // Upload the file to Supabase
+        const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('team-image')
+            .upload(fileName, file, { upsert: true });
+
+        if (uploadError) {
+            console.error('Error uploading file:', uploadError);
+            return;
+        }
+
+        // Get the public URL for the uploaded image
+        const { data: urlData, error: urlError } = supabase
+            .storage
+            .from('team-image')
+            .getPublicUrl(fileName);
+
+        if (urlError || !urlData || !urlData.publicUrl) {
+            console.error('Error getting public URL:', urlError || "No data");
+            return;
+        }
+
+        // Update the preview image and global variable
+        uploadedImageUrl = urlData.publicUrl;
+        idolPortrait.src = uploadedImageUrl;
     };
 }
+
 
 function profanity_checker(text) {
     let banned_words = ["fuck", "shit", "ass", "bitch", "hoe", "slut", "tits", "dick", "pussy", "whores",
@@ -156,15 +187,15 @@ let background_music = document.getElementById("background_music");
 
 // Runs every time a new team is created
 document.addEventListener('DOMContentLoaded', init, false);
-function init(){
+async function init(){
     var background_music = document.getElementById("background_music")
     var team_form = document.getElementById("team_form")
-    team_form.addEventListener("submit", function(event) {
+    team_form.addEventListener("submit", async function(event) {
         event.preventDefault()
         
         var input_name = document.getElementById("team_name").value
         // for religion/idol picture
-        var idol_game_src = document.getElementById("idol_image").src
+        var idol_game_src = uploadedImageUrl;
 
         // alert created if user does not put in team name
         if (input_name == "") {
@@ -200,10 +231,7 @@ function init(){
         // Updates the variable
         current_team = created_team
 
-        document.getElementById("game").querySelector("#current_idol_image").src = idol_game_src;
-        // this hides the team creating screen
-        // document.getElementById("start_screen").style.display = "none";
-        document.getElementById("game").style.visibility="visible";
+        document.getElementById("game").querySelector("#current_idol_image").src = uploadedImageUrl;
 
         // Once the team is created it plays heavenly music
         background_music.play().catch(error => console.log("Autoplay blocked, user interaction needed."));
@@ -214,6 +242,7 @@ function init(){
          .insert([
              { name: input_name, point_total: 0, image_file: idol_game_src, tier: 1 }
          ])
+         .select()
          .then(({ data, error }) => {
              if (error) {
                  console.error('Error inserting team:', error);
@@ -229,6 +258,9 @@ function switch_team(team) {
     document.getElementById("team_name_display").innerHTML = current_team.display_name()
     document.getElementById("points_display").innerHTML = current_team.display_points()
     document.getElementById("current_idol_image").src = current_team.display_image()
+    document.getElementById("game").style.visibility="visible";
+    // Once the team is created it plays heavenly music
+    background_music.play().catch(error => console.log("Autoplay blocked, user interaction needed."));
 }
 
 function clear_field() {
