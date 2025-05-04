@@ -92,6 +92,31 @@ window.onchange = function() {
 
 // Function to create a prayer emoji effect after pressing prayer button
 function prayer_effects() {
+    // adding timer functionality to prevent multiple clicks at a time.
+    const pray_button = document.getElementById("pray_button");
+    const time_display = document.getElementById("timer");
+
+    // disables the button and starts the timer
+    pray_button.disabled = true; 
+    
+    // Set 10 seconds for presentaton purposes
+    time_left = 10
+    time_display.textContent = `0:${time_left.toString().padStart(2, '0')}`;
+
+    // countdown for timer
+    const countdown = setInterval(() => {
+        time_left--;
+        time_display.textContent = `0:${time_left.toString().padStart(2, '0')}`;
+
+        if (time_left <= 0) {
+            clearInterval(countdown);
+            // Once timer is finished enables button
+            pray_button.disabled = false;
+            time_display.textContent = "Spend Some Time🙏📖"; // Reset timer display
+        }
+    }, 1000);
+
+
     // Creates a span element for the emoji
     let emoji = document.createElement("span")
     emoji.setAttribute("id", "emoji")
