@@ -135,6 +135,12 @@ input[type="submit"] {
     display:none;
 }
 
+#pray_button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
 /* File upload button styling */
 .custom-file-upload {
     border: 2px solid #ccc;
@@ -160,4 +166,8 @@ input[type="submit"] {
     background-color: #121c28;
     height: 40px;
     width: 200px;
+
+
+
+
   }

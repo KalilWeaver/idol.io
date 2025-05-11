@@ -99,22 +99,29 @@ function prayer_effects() {
     // disables the button and starts the timer
     pray_button.disabled = true; 
     
-    // Set 10 seconds for presentaton purposes
-    time_left = 10
-    time_display.textContent = `0:${time_left.toString().padStart(2, '0')}`;
+    // Set to 30 minutes in seconds
+    time_left = 1800
+    update_timer_display(time_left)
 
     // countdown for timer
     const countdown = setInterval(() => {
         time_left--;
-        time_display.textContent = `0:${time_left.toString().padStart(2, '0')}`;
+        update_timer_display(time_left)
 
         if (time_left <= 0) {
             clearInterval(countdown);
             // Once timer is finished enables button
             pray_button.disabled = false;
             time_display.textContent = "Spend Some Time🙏📖"; // Reset timer display
+            alert("Your prayer is ready again!🙏 ")
         }
     }, 1000);
+
+    function update_timer_display(seconds) {
+        const minutes= Math.floor(seconds/60)
+        const secs = seconds % 60
+        time_display.textContent = `${minutes}:${secs.toString().padStart(2, '0')}`;
+    }
 
 
     // Creates a span element for the emoji
